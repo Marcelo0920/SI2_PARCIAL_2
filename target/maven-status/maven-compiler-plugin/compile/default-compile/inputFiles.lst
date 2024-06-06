@@ -3,6 +3,7 @@ D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\config\ApplicationCo
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\dto\LicenciaRequest.java
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\controller\ClassController.java
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\jwt\JwtAuthenticationFilter.java
+D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\config\CorsConfiguration.java
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\controller\AdminController.java
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\config\SecurityConfig.java
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\controller\TeacherController.java
