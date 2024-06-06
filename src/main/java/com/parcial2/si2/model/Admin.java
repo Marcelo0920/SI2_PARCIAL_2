@@ -6,6 +6,11 @@ import java.time.LocalTime;
 @Entity
 public class Admin extends Usuario {
 
+    public Admin(){
+        super();
+        this.setRole(Role.ADMIN);
+    }
+
     private LocalTime horarioEntrada;
     private LocalTime horarioSalida;
 

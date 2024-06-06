@@ -22,6 +22,8 @@ public class UserService{
         return userRepository.findById(id);
     }
 
+    public Optional<Usuario> getUserByUserCode(String userCode){return userRepository.findByUserCode(userCode);}
+
     public Usuario saveUser(Usuario user){
         return userRepository.save(user);
     }
