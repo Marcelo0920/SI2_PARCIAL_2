@@ -24,11 +24,14 @@ public class JwtService {
     }
 
     public String getTokencito(Map<String, Object> extraClaims, UserDetails user){
+
+        long expirationInMillis = 24 * 60 * 60 * 1000;
+
         return Jwts.builder()
                 .setClaims(extraClaims)
                 .setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .setExpiration(new Date(System.currentTimeMillis() + expirationInMillis))
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

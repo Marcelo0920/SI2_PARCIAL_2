@@ -83,6 +83,7 @@ D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\controller\AcademicP
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\dto\ClassRequest.java
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\model\Subject.java
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\repository\ClassRepository.java
+D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\config\SchedulerConfig.java
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\service\AnotacionService.java
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\controller\AttendanceController.java
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\service\FaltaService.java
