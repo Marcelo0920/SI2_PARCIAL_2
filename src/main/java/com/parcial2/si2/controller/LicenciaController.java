@@ -39,6 +39,6 @@ public class LicenciaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteLicencia(@PathVariable("id") Long id) {
         licenciaService.deleteLicencia(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

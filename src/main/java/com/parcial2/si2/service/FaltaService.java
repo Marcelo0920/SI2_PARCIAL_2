@@ -1,7 +1,7 @@
 package com.parcial2.si2.service;
 
 import com.parcial2.si2.dto.FaltaRequest;
-import com.parcial2.si2.model.Class;
+import com.parcial2.si2.model.CourseClass;
 import com.parcial2.si2.model.Falta;
 import com.parcial2.si2.model.Teacher;
 import com.parcial2.si2.repository.ClassRepository;
@@ -36,7 +36,7 @@ public class FaltaService {
     public Falta saveFalta(FaltaRequest faltaRequest) {
         Falta falta = new Falta();
 
-        Optional<Class> classOptional = classRepository.findById(faltaRequest.getClassId());
+        Optional<CourseClass> classOptional = classRepository.findById(faltaRequest.getClassId());
         classOptional.ifPresent(falta::setClase);
 
         Optional<Teacher> teacherOptional = teacherRepository.findById(faltaRequest.getTeacherId());

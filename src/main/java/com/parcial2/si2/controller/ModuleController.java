@@ -4,8 +4,6 @@ import com.parcial2.si2.dto.ModuleRequest;
 import com.parcial2.si2.model.Module;
 import com.parcial2.si2.service.ModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

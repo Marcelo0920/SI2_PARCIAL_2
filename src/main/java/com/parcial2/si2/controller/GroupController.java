@@ -40,6 +40,6 @@ public class GroupController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteGroup(@PathVariable("id") Long id) {
         groupService.deleteGroup(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

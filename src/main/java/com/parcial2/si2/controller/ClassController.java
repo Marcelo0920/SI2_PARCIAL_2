@@ -1,7 +1,7 @@
 package com.parcial2.si2.controller;
 
 import com.parcial2.si2.dto.ClassRequest;
-import com.parcial2.si2.model.Class;
+import com.parcial2.si2.model.CourseClass;
 import com.parcial2.si2.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,33 +19,33 @@ public class ClassController {
     private ClassService classService;
 
     @GetMapping
-    public ResponseEntity<List<Class>> getAllClasses() {
-        List<Class> classes = classService.getAllClasses();
-        return new ResponseEntity<>(classes, HttpStatus.OK);
+    public ResponseEntity<List<CourseClass>> getAllClasses() {
+        List<CourseClass> courseClasses = classService.getAllClasses();
+        return new ResponseEntity<>(courseClasses, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Class> getClassById(@PathVariable("id") Long id) {
-        Optional<Class> clase = classService.getClassById(id);
+    public ResponseEntity<CourseClass> getClassById(@PathVariable("id") Long id) {
+        Optional<CourseClass> clase = classService.getClassById(id);
         return clase.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
-    public ResponseEntity<Class> createClass(@RequestBody ClassRequest classRequest) {
-        Class savedClass = classService.saveClass(classRequest);
-        if (savedClass != null) {
-            return ResponseEntity.ok(savedClass);
+    public ResponseEntity<CourseClass> createClass(@RequestBody ClassRequest classRequest) {
+        CourseClass savedCourseClass = classService.saveClass(classRequest);
+        if (savedCourseClass != null) {
+            return ResponseEntity.ok(savedCourseClass);
         } else {
             return ResponseEntity.badRequest().build();
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Class> updateClass(@PathVariable("id") Long id, @RequestBody ClassRequest classRequest) {
-        Class updatedClass = classService.updateClass(id, classRequest);
-        if (updatedClass != null) {
-            return ResponseEntity.ok(updatedClass);
+    public ResponseEntity<CourseClass> updateClass(@PathVariable("id") Long id, @RequestBody ClassRequest classRequest) {
+        CourseClass updatedCourseClass = classService.updateClass(id, classRequest);
+        if (updatedCourseClass != null) {
+            return ResponseEntity.ok(updatedCourseClass);
         } else {
             return ResponseEntity.notFound().build();
         }

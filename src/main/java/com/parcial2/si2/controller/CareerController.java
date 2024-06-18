@@ -40,8 +40,10 @@ public class CareerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCareer(@PathVariable("id") Long id) {
-        careerService.deleteCareer(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<String> deleteCareer(@PathVariable("id") Long id) {
+        boolean isDeleted = careerService.deleteCareer(id);
+
+            return new ResponseEntity<>("El registro se eliminó con éxito", HttpStatus.OK);
+        }
     }
-}
+

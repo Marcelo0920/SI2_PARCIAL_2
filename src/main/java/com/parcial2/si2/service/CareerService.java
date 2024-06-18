@@ -45,7 +45,11 @@ public class CareerService {
         return careerRepository.save(career);
     }
 
-    public void deleteCareer(Long id) {
-        careerRepository.deleteById(id);
+    public boolean deleteCareer(Long id) {
+        return careerRepository.findById(id)
+                .map(career -> {
+                    careerRepository.delete(career);
+                    return true;
+                }).orElse(false);
     }
 }

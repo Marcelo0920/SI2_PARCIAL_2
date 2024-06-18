@@ -1,5 +1,6 @@
 package com.parcial2.si2.controller;
 
+import com.parcial2.si2.dto.SubjectRequest;
 import com.parcial2.si2.model.Subject;
 import com.parcial2.si2.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,8 @@ public class SubjectController {
     private SubjectService subjectService;
 
     @GetMapping
-    public ResponseEntity<List<Subject>> getAllSubjects() {
-        List<Subject> subjects = subjectService.getAllSubjects();
-        return new ResponseEntity<>(subjects, HttpStatus.OK);
+    public List<Subject> getAllSubjects(){
+        return subjectService.getAllSubjects();
     }
 
     @GetMapping("/{id}")
@@ -31,9 +31,17 @@ public class SubjectController {
     }
 
     @PostMapping
-    public ResponseEntity<Subject> createSubject(@RequestBody Subject subject) {
-        Subject createdSubject = subjectService.saveSubject(subject);
-        return new ResponseEntity<>(createdSubject, HttpStatus.CREATED);
+    public ResponseEntity<Subject> createSubject(@RequestBody SubjectRequest subjectRequest) {
+        return subjectService.saveSubject(subjectRequest)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.badRequest().build());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Subject> updateSubject(@PathVariable Long id, @RequestBody SubjectRequest subjectRequest){
+        return subjectService.updateSubject(id, subjectRequest)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.badRequest().build());
     }
 
     @DeleteMapping("/{id}")

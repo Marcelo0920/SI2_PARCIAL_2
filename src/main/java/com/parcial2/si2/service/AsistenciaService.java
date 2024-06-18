@@ -2,7 +2,7 @@ package com.parcial2.si2.service;
 
 import com.parcial2.si2.dto.AsistenciaRequest;
 import com.parcial2.si2.model.Asistencia;
-import com.parcial2.si2.model.Class;
+import com.parcial2.si2.model.CourseClass;
 import com.parcial2.si2.model.Teacher;
 import com.parcial2.si2.repository.AsistenciaRepository;
 import com.parcial2.si2.repository.ClassRepository;
@@ -36,7 +36,7 @@ public class AsistenciaService {
     public Asistencia saveAsistencia(AsistenciaRequest asistenciaRequest) {
         Asistencia asistencia = new Asistencia();
 
-        Optional<Class> classOptional = classRepository.findById(asistenciaRequest.getClassId());
+        Optional<CourseClass> classOptional = classRepository.findById(asistenciaRequest.getClassId());
         classOptional.ifPresent(asistencia::setClase);
 
         Optional<Teacher> teacherOptional = teacherRepository.findById(asistenciaRequest.getTeacherId());

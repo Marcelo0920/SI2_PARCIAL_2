@@ -1,10 +1,12 @@
 package com.parcial2.si2.service;
 
+import com.parcial2.si2.dto.TeacherRequest;
 import com.parcial2.si2.model.Career;
 import com.parcial2.si2.model.Faculty;
 import com.parcial2.si2.model.Teacher;
 import com.parcial2.si2.repository.CareerRepository;
 import com.parcial2.si2.repository.FacultyRepository;
+import com.parcial2.si2.repository.TeacherRepository;
 import com.parcial2.si2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,6 +30,9 @@ public class TeacherService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private TeacherRepository teacherRepository;
+
     public List<Teacher> getAllTeachers() {
         return userRepository.findAll().stream()
                 .filter(user -> user instanceof Teacher)
@@ -40,21 +45,22 @@ public class TeacherService {
                 .map(user -> (Teacher) user);
     }
 
-    public Teacher saveTeacher(String email, String name, String phoneNumber, String userCode, int age, float effectiveHours, String password, Long facultyId, Long careerId) {
+    public Teacher saveTeacher(TeacherRequest teacherRequest) {
         Teacher teacher = new Teacher();
-        teacher.setEmail(email);
-        teacher.setName(name);
-        teacher.setPhoneNumber(phoneNumber);
-        teacher.setUserCode(userCode);
-        teacher.setAge(age);
-        teacher.setEffectiveHours(effectiveHours);
-        teacher.setPassword(passwordEncoder.encode(password));
+        teacher.setEmail(teacherRequest.getEmail());
+        teacher.setName(teacherRequest.getName());
+        teacher.setPhoneNumber(teacherRequest.getPhoneNumber());
+        teacher.setUserCode(teacherRequest.getUserCode());
+        teacher.setAge(teacherRequest.getAge());
+        teacher.setEffectiveHours(teacherRequest.getEffectiveHours());
+        teacher.setPassword(passwordEncoder.encode(teacherRequest.getPassword()));
 
-
-        Faculty faculty = facultyRepository.findById(facultyId).orElseThrow(() -> new RuntimeException("Faculty not found"));
-        Career career = careerRepository.findById(careerId).orElseThrow(() -> new RuntimeException("Career not found"));
-
+        Faculty faculty = facultyRepository.findById(teacherRequest.getFacultyId())
+                .orElseThrow(() -> new RuntimeException("Faculty not found"));
         teacher.setFaculty(faculty);
+
+        Career career = careerRepository.findById(teacherRequest.getCareerId())
+                .orElseThrow(() -> new RuntimeException("Career not found"));
         teacher.setCareer(career);
 
         return userRepository.save(teacher);
@@ -70,5 +76,19 @@ public class TeacherService {
 
     public void deleteTeacher(Long id) {
         userRepository.deleteById(id);
+    }
+
+    //ADD CLASSES TO TEACHER
+    public Teacher addClassesToTeacher(Long teacherId, List<Long> newClassIds) {
+        Teacher teacher = teacherRepository.findById(teacherId)
+                .orElseThrow(() -> new RuntimeException("Teacher not found"));
+
+        // Actualiza las clases del profesor con las nuevas clases
+        List<Long> currentClasses = teacher.getClasses();
+        currentClasses.addAll(newClassIds);
+        teacher.setClasses(currentClasses);
+
+        // Guarda y devuelve el profesor actualizado
+        return teacherRepository.save(teacher);
     }
 }

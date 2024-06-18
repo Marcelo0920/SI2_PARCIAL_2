@@ -32,18 +32,17 @@ public class TeacherController {
     }
 
     @PostMapping
-    public Teacher createTeacher(@RequestBody TeacherRequest teacherRequest) {
-        return teacherService.saveTeacher(
-                teacherRequest.getEmail(),
-                teacherRequest.getName(),
-                teacherRequest.getPhoneNumber(),
-                teacherRequest.getUserCode(),
-                teacherRequest.getAge(),
-                teacherRequest.getEffectiveHours(),
-                teacherRequest.getPassword(),
-                teacherRequest.getFacultyId(),
-                teacherRequest.getCareerId()
-        );
+    public ResponseEntity<Teacher> createTeacher(@RequestBody TeacherRequest teacherRequest) {
+        Teacher newTeacher = teacherService.saveTeacher(teacherRequest);
+        return new ResponseEntity<>(newTeacher, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/{id}/add-classes")
+    public ResponseEntity<Teacher> addClassesToTeacher(@PathVariable Long id, @RequestBody List<Long> newClassIds) {
+        System.out.println("Nuevos IDs de clases: " + newClassIds);
+
+        Teacher updatedTeacher = teacherService.addClassesToTeacher(id, newClassIds);
+        return ResponseEntity.ok(updatedTeacher);
     }
 
     @PutMapping("/{id}")

@@ -13,7 +13,7 @@ public class Asistencia {
 
     @ManyToOne
     @JoinColumn(name = "class_id", referencedColumnName = "id")
-    private Class clase;
+    private CourseClass clase;
 
     @ManyToOne
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
@@ -37,11 +37,11 @@ public class Asistencia {
         this.date = date;
     }
 
-    public Class getClase() {
+    public CourseClass getClase() {
         return clase;
     }
 
-    public void setClase(Class clase) {
+    public void setClase(CourseClass clase) {
         this.clase = clase;
     }
 
