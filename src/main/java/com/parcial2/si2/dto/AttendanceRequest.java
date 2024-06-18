@@ -4,7 +4,7 @@ public class AttendanceRequest {
     private Long classId;
     private boolean isPresent;
 
-    // Getters and setters
+    // Getters y setters
     public Long getClassId() {
         return classId;
     }

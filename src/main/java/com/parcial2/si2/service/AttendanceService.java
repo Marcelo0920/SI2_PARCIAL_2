@@ -26,6 +26,20 @@ public class AttendanceService {
     private ClassRepository classRepository;
 
 
+    public List<Attendance> getAttendancesByClass(Long classId) {
+        Optional<CourseClass> optionalClass = classRepository.findById(classId);
+        if (optionalClass.isPresent()) {
+            CourseClass clase = optionalClass.get();
+            List<Attendance> attendances = attendanceRepository.findByClase(clase);
+            // Asignar el id de la clase a cada Attendance
+            attendances.forEach(attendance -> attendance.getClase().setId(clase.getId()));
+            return attendances;
+        } else {
+            return null; // O lanzar una excepción, dependiendo de la lógica de tu aplicación
+        }
+    }
+
+
     @Scheduled(cron = "0 */3 * * * *")
     public void createDailyAttendences(){
         String currentDay = getCurrentDayInSpanish();
@@ -71,6 +85,29 @@ public class AttendanceService {
                 }
             }
         }
+    }
+
+    //Registrar asistencia via admin
+    @Transactional
+    public boolean createAttendance(Long classId){
+        Optional<CourseClass> optionalClass = classRepository.findById(classId);
+
+        if(optionalClass.isPresent()){
+            CourseClass clase = optionalClass.get();
+            LocalDate today = LocalDate.now();
+
+            // Crear nuevo registro de Attendance
+            Attendance attendance = new Attendance();
+            attendance.setClase(clase);
+            attendance.setDate(today);
+            attendance.setIsPresent(true); // Establecer isPresent en true
+            attendance.setLicencia(null);
+            attendanceRepository.save(attendance);
+
+            return true; // Se pudo crear la asistencia
+        }
+
+        return false; // No se encontró la clase con el ID especificado
     }
 
    //Registrar Asistencia

@@ -12,6 +12,8 @@ import java.util.List;
 @Repository
 public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
 
+    List<Attendance> findByClase(CourseClass clase);
+
     // Método derivado para buscar asistencias no registradas
     List<Attendance> findByClaseIdAndDateAndIsPresentIsNullAndLicenciaIsNull(Long classId, LocalDate date);
 
