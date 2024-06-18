@@ -40,7 +40,7 @@ public class AttendanceService {
     }
 
 
-    @Scheduled(cron = "0 */3 * * * *")
+
     public void createDailyAttendences(){
         String currentDay = getCurrentDayInSpanish();
         List<CourseClass> todayClasses = findClassesByDate(currentDay);
@@ -57,7 +57,7 @@ public class AttendanceService {
     }
 
     //correr la funcion todos los dias a las 23:40
-    @Scheduled(cron = "0 */7 * * * *")
+
     public void checkUnregisteredAttendances() {
         String currentDay = getCurrentDayInSpanish();
         List<CourseClass> todayClasses = findClassesByDate(currentDay);
