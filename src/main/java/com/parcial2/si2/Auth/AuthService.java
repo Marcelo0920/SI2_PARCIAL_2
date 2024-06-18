@@ -41,16 +41,34 @@ public class AuthService {
 
     // Método login
     public AuthResponse login(LoginRequest request) {
-
+        // Imprime la contraseña recibida para verificar en la consola
         System.out.println(request.getPassword());
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+
+        // Intenta autenticar las credenciales proporcionadas
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+
+        // Si la autenticación es exitosa, continua obteniendo los detalles del usuario
         System.out.println("ha pasado el filtro");
-        UserDetails user = userRepository.findByEmail(request.getEmail()).orElseThrow();
-        String token = jwtService.getToken(user);
-        System.out.println("Aca viene el token encontrado");
+        UserDetails userDetails = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Castear UserDetails a Usuario para obtener el ID, nombre y correo
+        Usuario usuario = (Usuario) userDetails;
+
+        // Obtiene el token JWT
+        String token = jwtService.getToken(userDetails);
+
+        // Imprime el token generado para verificar en la consola
+        System.out.println("Token generado:");
         System.out.println(token);
+
+        // Construye la respuesta de autenticación con el token, ID, nombre y correo del usuario
         return AuthResponse.builder()
                 .token(token)
+                .userId(usuario.getId())
+                .userName(usuario.getName()) // Nombre del usuario
+                .userEmail(usuario.getEmail()) // Correo electrónico del usuario
                 .build();
     }
 
