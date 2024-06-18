@@ -26,6 +26,7 @@ D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\repository\Comunicad
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\service\AttendanceService.java
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\builder\TeacherBuilder.java
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\service\ClassService.java
+D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\dto\AttendanceRequest.java
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\model\Classroom.java
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\repository\LicenciaRepository.java
 D:\Maru\UNI\SI2\Parcial2\si2\src\main\java\com\parcial2\si2\controller\LicenciaController.java

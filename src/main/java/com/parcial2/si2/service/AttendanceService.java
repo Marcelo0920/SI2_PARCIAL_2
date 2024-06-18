@@ -25,8 +25,8 @@ public class AttendanceService {
     @Autowired
     private ClassRepository classRepository;
 
-    //correr la funcion todos los dias a las 23:40
-    @Scheduled(cron = "0 0 1 * * ?")
+
+    @Scheduled(cron = "0 */3 * * * *")
     public void createDailyAttendences(){
         String currentDay = getCurrentDayInSpanish();
         List<CourseClass> todayClasses = findClassesByDate(currentDay);
@@ -42,7 +42,8 @@ public class AttendanceService {
         }
     }
 
-    @Scheduled(cron = "0 0 23 * * ?")
+    //correr la funcion todos los dias a las 23:40
+    @Scheduled(cron = "0 */5 * * * *")
     public void checkUnregisteredAttendances() {
         String currentDay = getCurrentDayInSpanish();
         List<CourseClass> todayClasses = findClassesByDate(currentDay);
